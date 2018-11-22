@@ -4,6 +4,7 @@ import yaml, sys
 with open(sys.argv[1], 'r') as stream:  # input file is the first argument
     try:
         yamldata = yaml.load(stream) # parse the yaml file
+        outfile = os.path.splitext(sys.argv[1])[0] + ".gift"
         with open(sys.argv[2], 'w') as output:
             # iterate over all of the questions
             for i, d in enumerate(yamldata):
@@ -43,7 +44,7 @@ with open(sys.argv[1], 'r') as stream:  # input file is the first argument
 
                     # write out the answer
                     output.write(prefix + "[moodle]" + option["answer"] + "#" + option["feedback"] + "\n")
-                    
+
                 output.write("}\n\n")
     except yaml.YAMLError as exc:
         print(exc)
